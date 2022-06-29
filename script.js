@@ -23,7 +23,7 @@ function makeGrid(rows, cols)
     }
 }
 
-makeGrid(15, 15)
+makeGrid(20, 20)
 
 function changeColor(cell)
 {
