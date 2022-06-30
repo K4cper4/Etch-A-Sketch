@@ -1,4 +1,6 @@
 const DEFAULT_COLOR = '#FCEDDA'
+const DEFAULT_SIZE = 16
+const DEFAULT_MODE = 'color'
 
 const grid = document.querySelector(".grid-content")
 
@@ -7,24 +9,37 @@ let mouseDown = false
 document.body.onmousedown = () => (mouseDown = true)
 document.body.onmouseup = () => (mouseDown = false)
 
-function makeGrid(rows, cols)
+//GRID -> Creator
+function makeGrid(value)
 {
-    grid.style.setProperty('--grid-rows', rows)
-    grid.style.setProperty('--grid-cols', cols)
+    grid.style.setProperty('--grid-value', value)
+    grid.style.setProperty('--grid-value', value)
 
-    for (let i = 0; i < (rows * cols); i++)
+    for (let i = 0; i < (value * value); i++)
     {
         const gridElement = document.createElement("div")
         gridElement.classList.add('grid-element')
-        gridElement.textContent = `${i + 1}`
+        //gridElement.textContent = `${i + 1}`
         gridElement.addEventListener('mouseover', changeColor)
         gridElement.addEventListener('mousedown', changeColor)
         grid.appendChild(gridElement)
     }
 }
 
-makeGrid(20, 20)
+function reloadGrid(value)
+{
+    clearGrid()
+    makeGrid(value)
+}
 
+function clearGrid()
+{
+    grid.innerHTML = ''
+}
+//testing grid
+//makeGrid(10, 10)
+
+//COLOR -> Properties
 function changeColor(cell)
 {
     if (cell.type === 'mouseover' && !mouseDown)
@@ -33,4 +48,21 @@ function changeColor(cell)
     }
 
     cell.target.style.backgroundColor = color
+}
+
+//RANGE -> Properties
+let i = document.querySelector('input')
+let o = document.querySelector('.output')
+
+o.innerText = `${i.value} x ${i.value}`;
+
+i.addEventListener('input', () =>
+{
+    o.innerText = `${i.value} x ${i.value}`;
+    reloadGrid(i.value)
+})
+
+window.onload = () =>
+{
+    reloadGrid(DEFAULT_SIZE)
 }
