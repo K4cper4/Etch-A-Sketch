@@ -16,13 +16,18 @@
 
   <div class="container">
     <div class="menu-content">
-      <button class="btn-prop">Color</button>
+      <div class="color-menu">
+        <label for="colorpicker">Color</label>
+        <input type="color" id="colorpicker" value="black">
+      </div>
+      <button class="btn-prop">Pencil</button>
       <button>Rainbow</button>
       <button>Shade</button>
       <button>Light</button>
       <button>Eraser</button>
+      <label for="sizes">Size</label>
       <input type="range" id="sizes" name="cells" min="1" max="64" value="16">
-      <div class="output"></div>
+      <div id="output"></div>
     </div>
     <div class="main-content">
       <div class="grid-content">
@@ -31,11 +36,11 @@
       <div class="bottom-content">
         <div>
           <div class="show">
-            <div>Show grid line</div>
+            <label for="grid-line">Show grid line</label>
             <input type="checkbox" id="grid-line" name="grid-line">
           </div>
           <div class="show">
-            <div>Show grid dots</div>
+            <label for="grid-dots">Show grid dots</label>
             <input type="checkbox" id="grid-dots" name="grid-line">
           </div>
         </div>
