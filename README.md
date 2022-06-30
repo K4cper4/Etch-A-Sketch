@@ -1,6 +1,6 @@
 ![Etch-A-Sketch made by Kacper](docs/Etch-A-Sketch.png)
 
-#Etch-A-Sketch
+# Etch-A-Sketch
 
 ## Contact
 
