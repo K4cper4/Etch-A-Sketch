@@ -21,6 +21,16 @@ My goal is to create a page where you can draw images from 8x8 to 64x64. This is
 
 ## Changelog
 
+**Change #2.1**
+**index.html**
+* Add color picker
+* Change color button to pencil button
+* Add few classes
+
+**script.js**
+* Fix a small bug
+
+
 **Change #2**
 **index.html**
 * Add buttons - color, rainbow, shading, clearer and eraser
