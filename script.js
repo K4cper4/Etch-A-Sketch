@@ -51,8 +51,8 @@ function changeColor(cell)
 }
 
 //RANGE -> Properties
-let i = document.querySelector('input')
-let o = document.querySelector('.output')
+let i = document.querySelector('#sizes')
+let o = document.querySelector('#output')
 
 o.innerText = `${i.value} x ${i.value}`;
 
