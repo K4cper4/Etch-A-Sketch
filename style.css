@@ -1,23 +1,75 @@
 :root {
-    --grid-cols: 1;
-    --grid-rows: 1;
+    --grid-value: 1;
 }
 
+* {
+    padding: 0;
+    margin: 0;
+}
+    
+body {
+    background-color: #FED766;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header, .footer {
+    padding: 45px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #272727;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.menu-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    margin: 100px 50px 100px 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.bottom-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.show {
+    display: flex;
+}
+
+.footer {
+    margin-top: auto;
+}
+
+
+/* GRID -> Properties */
 .grid-content {
     display: inline-grid;
     height: 500px;
     width: 500px;
-    grid-template-columns: repeat(var(--grid-cols), 1fr);
-    grid-template-rows: repeat(var(--grid-rows), 1fr);
-    border: 2px solid black;
-    box-shadow: 0px 0px 7px;
+    grid-template-columns: repeat(var(--grid-value), 1fr);
+    grid-template-rows: repeat(var(--grid-value), 1fr);
+    border: 5px solid #272727;
+    box-shadow: 0px 0px 7px #272727;
 }
 
 .grid-element {
     border: none;
+    background-color: #EFF1F3;
 }
 
 .grid-element:hover {
-    background-color: #ADD8E6;
+    background-color: #BFB6BB;
     user-select: none;
 }
