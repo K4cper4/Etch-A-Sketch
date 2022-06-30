@@ -21,7 +21,7 @@ My goal is to create a page where you can draw images from 8x8 to 64x64. This is
 
 ## Changelog
 
-**Change #2.1**__
+**Change #2.1** </br>
 **index.html**
 * Add color picker
 * Change color button to pencil button
@@ -31,7 +31,7 @@ My goal is to create a page where you can draw images from 8x8 to 64x64. This is
 * Fix a small bug
 
 
-**Change #2**__
+**Change #2** </br>
 **index.html**
 * Add buttons - color, rainbow, shading, clearer and eraser
 * But these buttons don't work for now
