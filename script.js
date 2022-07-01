@@ -66,3 +66,7 @@ window.onload = () =>
 {
     reloadGrid(DEFAULT_SIZE)
 }
+
+//DOWNLOAD PICTURE -> Alpha Testing -> Maybe be deleted in future
+
+// for now nothing xd
