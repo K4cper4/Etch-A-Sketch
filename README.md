@@ -21,6 +21,13 @@ My goal is to create a page where you can draw images from 8x8 to 64x64. This is
 
 ## Changelog
 
+**Change #3** </br>
+**index.html**
+* Change clearer -> brightening
+* Add ID and classes for buttons
+* Change show grid types (checkbox -> button)
+* 
+
 **Change #2.1** </br>
 **index.html**
 * Add color picker
