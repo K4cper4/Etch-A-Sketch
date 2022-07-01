@@ -52,8 +52,16 @@ body {
     margin-top: auto;
 }
 
+/* CANVAS -> Properties */
+canvas {
+    width: 500px;
+    height: 500px;
+    cursor: crosshair; /* later: add custom cursor */
+}
+
 
 /* GRID -> Properties */
+/*
 .grid-content {
     display: inline-grid;
     height: 500px;
@@ -73,3 +81,4 @@ body {
     background-color: #BFB6BB;
     user-select: none;
 }
+*/
