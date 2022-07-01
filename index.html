@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="style.css">
   <title>Etch-A-Sketch</title>
 </head>
+
 <body>
   <div class="header">
     <div class="title">Etch-A-Sketch</div>
@@ -20,33 +21,31 @@
         <label for="colorpicker">Color</label>
         <input type="color" id="colorpicker" value="black">
       </div>
-      <button class="btn-prop">Pencil</button>
-      <button>Rainbow</button>
-      <button>Shade</button>
-      <button>Light</button>
-      <button>Eraser</button>
+      <button id="pencil" class="btn">Pencil</button>
+      <button id="rainbow" class="btn">Rainbow</button>
+      <button id="shading" class="btn">Shading</button>
+      <button id="brightening" class="btn">Brightening</button>
+      <button id="eraser" class="btn">Eraser</button>
       <label for="sizes">Size</label>
       <input type="range" id="sizes" name="cells" min="1" max="64" value="16">
       <div id="output"></div>
     </div>
     <div class="main-content">
-      <div class="grid-content">
+      <div id="grid" class="grid-content">
         <!--GRID BOX-->
       </div>
       <div class="bottom-content">
         <div>
-          <div class="show">
-            <label for="grid-line">Show grid line</label>
-            <input type="checkbox" id="grid-line" name="grid-line">
-          </div>
-          <div class="show">
-            <label for="grid-dots">Show grid dots</label>
-            <input type="checkbox" id="grid-dots" name="grid-line">
-          </div>
+          <button>Show grid lines</button>
         </div>
-        
+        <div>
+          <button>Show grid dots</button>
+        </div>
         <div>
           <button>Clear</button>
+        </div>
+        <div>
+          <button id="download">Download</button>
         </div>
       </div>
     </div>
