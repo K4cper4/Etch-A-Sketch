@@ -1,145 +1,210 @@
-const DEFAULT_COLOR = '#FCEDDA'
+// DEFAULT VALUES
+const DEFAULT_COLOR = '#000000'
 const DEFAULT_SIZE = 16
-const DEFAULT_MODE = 'color'
-
-/*
-const grid = document.querySelector(".grid-content")
-
-let color = 'black'
-let mouseDown = false
-document.body.onmousedown = () => (mouseDown = true)
-document.body.onmouseup = () => (mouseDown = false)
-
-//GRID -> Creator
-function makeGrid(value)
-{
-    grid.style.setProperty('--grid-value', value)
-    grid.style.setProperty('--grid-value', value)
-
-    for (let i = 0; i < (value * value); i++)
-    {
-        const gridElement = document.createElement("div")
-        gridElement.classList.add('grid-element')
-        //gridElement.textContent = `${i + 1}`
-        gridElement.addEventListener('mouseover', changeColor)
-        gridElement.addEventListener('mousedown', changeColor)
-        grid.appendChild(gridElement)
-    }
-}
-
-function reloadGrid(value)
-{
-    clearGrid()
-    makeGrid(value)
-}
-
-function clearGrid()
-{
-    grid.innerHTML = ''
-}
-//testing grid
-//makeGrid(10, 10)
-
-//COLOR -> Properties
-function changeColor(cell)
-{
-    if (cell.type === 'mouseover' && !mouseDown)
-    {
-        return
-    }
-
-    cell.target.style.backgroundColor = color
-}
-
-//RANGE -> Properties
-let i = document.querySelector('#sizes')
-let o = document.querySelector('#output')
-
-o.innerText = `${i.value} x ${i.value}`;
-
-i.addEventListener('input', () =>
-{
-    o.innerText = `${i.value} x ${i.value}`;
-    reloadGrid(i.value)
-})
-
-window.onload = () =>
-{
-    reloadGrid(DEFAULT_SIZE)
-}
-
-//DOWNLOAD PICTURE -> Alpha Testing -> Maybe be deleted in future
-const download = document.querySelector('#download')
-
-function doCapture() {
-    html2canvas(document.getElementById('download').then(function (canvas) {
-        console.log(canvas.toDataURL("image/jpeg", 0.9))
-    }))
-}
-
-doCapture()
-*/
-
+const DEFAULT_MODE = "PENCIL"
+const DEFAULT_COLOR_BACKGROUND = '#ffffff'
+//
+// INITIALIZING CANVAS
 const canvas = document.getElementById('canvas')
-
 const ctx = canvas.getContext('2d');
 
+let mode = DEFAULT_MODE;
 
+let CANVAS_WIDTH = DEFAULT_SIZE;
+let CANVAS_HEIGHT = DEFAULT_SIZE;
 
-/*let canvasBounds = canvas.getBoundingClientRect();
+let scale = Math.floor(window.innerWidth / (CANVAS_WIDTH * 1.5))
+let currentWidth = CANVAS_WIDTH * scale;
+let currentHeight = CANVAS_HEIGHT * scale;
 
-let coord = 
+canvas.width = CANVAS_WIDTH * scale
+canvas.height = CANVAS_HEIGHT * scale
+
+canvas.style.width = `${CANVAS_WIDTH * scale}px`
+canvas.style.height = `${CANVAS_HEIGHT * scale}px`
+
+ctx.fillStyle = DEFAULT_COLOR_BACKGROUND
+ctx.fillRect(0, 0, canvas.width, canvas.height)
+ctx.fillStyle = DEFAULT_COLOR
+//
+// SIZE CHANGER
+const i1 = document.querySelector('#sizes')
+const change = document.querySelector('#change')
+const o1 = document.querySelector('#outputSize')
+
+o1.innerText = `${i1.value}px x ${i1.value}px`;
+
+i1.addEventListener('input', () =>
 {
-    x: 0,
-    y: 0,
-    lastX: 0,
-    lastY: 0
+    o1.innerText = `${i1.value}px x ${i1.value}px`;
+})
+//
+// CANVAS RELOAD
+change.addEventListener('click', () =>
+{
+    CANVAS_WIDTH = i1.value;
+    CANVAS_HEIGHT = i1.value;
+    scale = Math.floor(window.innerWidth / (CANVAS_WIDTH * 1.5))
+
+    currentWidth = CANVAS_WIDTH * scale;
+    currentHeight = CANVAS_HEIGHT * scale;
+
+    canvas.width = CANVAS_WIDTH * scale
+    canvas.height = CANVAS_HEIGHT * scale
+
+    canvas.style.width = `${CANVAS_WIDTH * scale}px`
+    canvas.style.height = `${CANVAS_HEIGHT * scale}px`
+
+    ctx.fillStyle = DEFAULT_COLOR_BACKGROUND
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+    ctx.fillStyle = color
+    draw()
+})
+//
+// PENCIL COLOR
+const colorPicker = document.getElementById("colorPicker")
+
+let color = DEFAULT_COLOR
+
+colorPicker.oninput = function()
+{
+    color = this.value
+}
+//
+// PENCIL
+const pencil = document.getElementById("pencil")
+
+pencil.addEventListener('click', () =>
+{
+    mode = DEFAULT_MODE
+    console.log(mode)
+})
+//
+// RAINBOW COLOR
+const rainbow = document.getElementById("rainbow")
+
+rainbow.addEventListener('click', () =>
+{
+    mode = "RAINBOW"
+    console.log(mode)
+})
+//
+// SHADING
+const shading = document.getElementById("shading")
+
+shading.addEventListener('click', () =>
+{
+    mode = "SHADING"
+})
+//
+// BRIGHTENING
+const brightening = document.getElementById("brightening")
+
+brightening.addEventListener('click', () =>
+{
+    mode = "BRIGHTENING"
+})
+//
+// SHADING
+const eraser = document.getElementById("eraser")
+
+eraser.addEventListener('click', () =>
+{
+    mode = "ERASER"
+})
+//
+// BRUSH SIZE
+const i2 = document.querySelector('#brushSizes')
+const brushSize = document.getElementById("brushSizes")
+const o2 = document.getElementById("outputBrush")
+
+let size = 1 * scale
+
+o2.innerText = `${i2.value}px`;
+
+brushSize.oninput = function()
+{
+    size = this.value * scale;
+    o2.innerText = `${i2.value}px`;
+}
+//
+// MOUSE FUNCTIONS
+let isPressed = false;
+
+window.onmousedown = function()
+{
+    isPressed = true;
 }
 
-document.addEventListener('mousedown', start);
-document.addEventListener('mouseup', stop);
-
-window.addEventListener('resize', resize);
-
-resize()
-
-function resize()
+window.onmouseup = function()
 {
-    ctx.canvas.width = window.innerWidth;
-    ctx.canvas.height = window.innerHeight;
+    isPressed = false;
 }
 
-function reposition(event)
+window.onmousemove = function(event)
 {
-    let bounds = canvas.getBoundingClientRect();
-    coord.x = event.pageX - bounds.left - scrollX;
-    coord.y = event.pageY - bounds.top - scrollY;
-    coord.x /= bounds.width;
-    coord.y /= bounds.height;
-
-    coord.x *= canvas.width;
-    coord.y *= canvas.height;
+    getMouse(canvas, event)
 }
 
-function start(event)
+function getMouse(canvas, event)
 {
-    document.addEventListener('mousemove', draw);
-    reposition(event);
+    let rect = canvas.getBoundingClientRect()
+
+    currentX = Math.floor((event.clientX - rect.left) / scale) * scale;
+    currentY = Math.floor((event.clientY - rect.top) / scale) * scale;
+}
+//
+// SAVE BUTTON
+const saveBtn = document.getElementById("download")
+const tempCanvas = document.createElement("canvas")
+const tempCtx = tempCanvas.getContext('2d')
+
+saveBtn.addEventListener('click', function(event)
+{
+    tempCanvas.width = CANVAS_WIDTH;
+    tempCanvas.height = CANVAS_HEIGHT;
+    tempCtx.drawImage(canvas, 0, 0, CANVAS_WIDTH * scale, CANVAS_HEIGHT * scale, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
+
+    let download = document.getElementById('downloadLink')
+    let image = tempCanvas.toDataURL("image/png").replace("image/png","image/octet-stream")
+
+    //let img = new Image()
+    download.setAttribute("href", image)
+})
+//
+// CLEAR BUTTON
+const clear = document.getElementById("clear")
+
+clear.addEventListener('click', () =>
+{
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.fillStyle = "white"
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+    ctx.fillStyle = color
+})
+//
+
+function draw()
+{
+    if (isPressed)
+    {
+        ctx.beginPath()
+        if (mode === "PENCIL")
+        {
+            ctx.fillStyle = color
+        }
+        else if (mode === "RAINBOW")
+        {
+            let tempColor = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+            //console.log(tempColor);
+            ctx.fillStyle = tempColor;
+        }
+        //ctx.fillStyle = color
+        ctx.fillRect(currentX, currentY, size, size);
+        ctx.fill()
+    }
+
+    window.requestAnimationFrame(draw)
 }
 
-function stop()
-{
-    document.removeEventListener('mousemove', draw);
-}
-
-function draw(event)
-{
-    ctx.beginPath();
-    ctx.lineWidth = 5;
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = "black";
-    ctx.moveTo(coord.x, coord.y);
-    reposition(event);
-    ctx.lineTo(coord.x, coord.y);
-    ctx.stroke();
-}*/
+draw()

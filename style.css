@@ -54,9 +54,10 @@ body {
 
 /* CANVAS -> Properties */
 canvas {
-    width: 500px;
-    height: 500px;
+    width: 600px;
+    height: 600px;
     cursor: crosshair; /* later: add custom cursor */
+    border: 1px solid #272727;
 }
 
 
