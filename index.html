@@ -4,50 +4,81 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--FILES-->
   <script src="script.js" defer></script>
   <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/7e42942710.js" crossorigin="anonymous"></script>
+  <!---->
   <title>Etch-A-Sketch</title>
+  <!--FONTS-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap" rel="stylesheet">
+  <!---->
 </head>
 
 <body>
   <div class="header">
     <div class="title">Etch-A-Sketch</div>
-    <div class="dark">Dark Mode (ICO)</div>
   </div>
 
   <div class="container">
     <div class="menu-content">
-      <div class="color-menu">
-        <label for="colorPicker">Pencil Color</label>
-        <input type="color" id="colorPicker" value="#000000">
+      <div class="prop-content">
+        <label for="colorPicker" class="fake-btn">Pencil Color</label>
+        <input type="color" id="colorPicker" class="color" value="#000000">
       </div>
       <button id="pencil" class="btn">Pencil</button>
       <button id="rainbow" class="btn">Rainbow</button>
-      <button id="shading" class="btn">Shading</button>
-      <button id="brightening" class="btn">Brightening</button>
       <button id="eraser" class="btn">Eraser</button>
-      <label for="brushSizes">Brush Size</label>
-      <input type="range" id="brushSizes" min="1" max="3" value="1">
-      <div id="outputBrush"></div>
-      <label for="sizes">Size</label>
-      <input type="range" id="sizes" min="1" max="64" value="16">
-      <div id="outputSize"></div>
-      <button id="change">Change</button>
-    </div>
-    <div class="main-content">
-      <canvas id="canvas"></canvas>
-      <div class="bottom-content">
-        <div>
-          <button id="clear">Clear</button>
-        </div>
-        <a href="" id="downloadLink" download="image.png">
-          <button id="download" download="image.png">Download</button>
-        </a>
+      <div class="prop-content">
+        <label for="brushSizes" class="fake-btn">Brush Size</label>
+        <input type="range" id="brushSizes" class="slider" min="1" max="5" value="1">
+        <div id="outputBrush" class="fake-btn"></div>
       </div>
+      <button id="clear" class="btn">Clear</button>
+      <a href="" id="downloadLink" class="flex" download="image.png">
+        <button id="download" class="btn" download="image.png">Download</button>
+      </a>
+      <br>
+      <br>
+      <div class="prop-content">
+        <label for="sizes" class="fake-btn">Size</label>
+        <input type="range" id="sizes" class="slider" min="1" max="64" value="16">
+        <div id="outputSize" class="fake-btn"></div>
+      </div>
+      <div class="prop-content">
+        <label for="colorBackground" class="fake-btn">Background Color</label>
+        <input type="color" id="colorBackground" class="color" value="#ffffff">
+      </div>
+      <button type="submit" id="change" class="btn">Change</button>
     </div>
+
+    <div class="main-content">
+      <div id="actualMode" class="actual-mode">MODE: </div>
+      <canvas id="canvas"></canvas>
+    </div>
+
   </div>
   <div class="footer">
-    Discord | Facebook | GitHub | Copyright R Kacper
+    <div class="footer-icons">
+      <ul>
+        <li><a href=""><i class="fa-brands fa-facebook"></i></a></li>
+        <li><a href="https://discordapp.com/users/Colazzo#2004"><i class="fa-brands fa-discord"></i></a></li>
+        <li><a href="https://github.com/K4cper4"><i class="fa-brands fa-github"></i></a></li>
+      </ul>
+    </div>
+    <div class="footer-text">
+      Copyright © 
+      <script>
+        document.write(new Date().getFullYear())
+      </script>
+      Colazzo
+    </div>
   </div>
 </body>
 </html>
