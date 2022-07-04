@@ -1,7 +1,3 @@
-:root {
-    --grid-value: 1;
-}
-
 * {
     padding: 0;
     margin: 0;
@@ -13,30 +9,130 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
-
+/* HEADER */
 .header, .footer {
-    padding: 45px;
+    padding: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     background-color: #272727;
 }
 
+.title {
+    font-family: 'Caveat', sans-serif;
+    font-size: 64px;
+    color: #FED766;
+}
+
+/* CONTAINER */
 .container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+}
+
+.flex {
+    display: flex;
+}
+
+.btn {
+    border: 3px solid #272727;
+    background-color: #FED766;
+    line-height: 1;
+    padding: 1em 1em;
+    margin: 0.5em;
+    font-family: "Roboto";
+    font-weight: 600;
+    font-size: 14px;
+    color: #272727;
+    flex: 1 0 auto;
+    text-align: center;
+}
+
+.fake-btn {
+    border: 3px solid #272727;
+    background-color: #FED766;
+    line-height: 1;
+    padding: 1em 1em;
+    margin: 0.5em;
+    font-family: "Roboto";
+    font-weight: 600;
+    font-size: 14px;
+    color: #272727;
+    flex: 1 0 auto;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #272727;
+    color: #FED766;
+    transition: 0.9s;
+}
+
+.color {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    height: 45px;
+    width: 42px;
+    margin: 0;
+    padding: 0;
+    flex: 0 0 auto;
+}
+
+.color::-webkit-color-swatch {
+    border: none;
+    border-radius: 30%;
+}
+
+.prop-content {
+    display: flex;
+    align-items: center;
+}
+
+.slider {
+    -webkit-appearance: none;
+    background-color: #FED766;
+    outline: none;
+    border: 3px solid #272727;
+    border-radius: 4px;
+    height: 2px;
+    background-color: #272727;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background-color: #FED766;
+    width: 20px;
+    height: 20px;
+    outline: none;
+    border: 3px solid #272727;
+    border-radius: 50%;
 }
 
 .menu-content {
     display: flex;
     flex-direction: column;
+    background-color: #33333375;
+    padding: 29px 15px 29px;
+    margin: 0px 30px;
 }
 
 .main-content {
-    margin: 100px 50px 100px 50px;
+    margin: 60px 40px 60px 40px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.actual-mode {
+    font-family: "Roboto";
+    font-size: 24px;
+    margin: 4px;
+    font-weight: bolder;
 }
 
 .bottom-content {
@@ -44,42 +140,76 @@ body {
     justify-content: space-between;
 }
 
-.show {
+a {
+    color: inherit;
+    text-decoration: none;
+}
+/* FOOTER */
+.footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 15px;
     display: flex;
 }
 
-.footer {
-    margin-top: auto;
+li a {
+    margin: 10px;
+    padding: 5px;
+    color: inherit;
+}
+
+.fa-brands {
+    font-size: 40px;
+}
+
+.fa-facebook {
+    color: #666666;
+}
+
+.fa-discord {
+    color: #666666;
+}
+
+.fa-github {
+    color: #666666;
+}
+
+.fa-facebook:hover {
+    color: #3b5998;
+    text-shadow: 0 0 5px #3b5998;
+    transition: 0.9s;
+}
+
+.fa-discord:hover {
+    color: #5865F2;
+    text-shadow: 0 0 5px #5865F2;
+    transition: 0.9s;
+}
+
+.fa-github:hover {
+    color: #e8eaea;
+    text-shadow: 0 0 5px #e8eaea;
+    transition: 0.9s;
+}
+
+.footer-text {
+    color: #FED766;
+    font-size: 14px;
+    font-family: 'Roboto';
 }
 
 /* CANVAS -> Properties */
 canvas {
-    width: 600px;
-    height: 600px;
+    display: grid;
+    grid-template-columns: auto;
+    justify-items: center;
+    align-items: center;
     cursor: crosshair; /* later: add custom cursor */
     border: 1px solid #272727;
 }
-
-
-/* GRID -> Properties */
-/*
-.grid-content {
-    display: inline-grid;
-    height: 500px;
-    width: 500px;
-    grid-template-columns: repeat(var(--grid-value), 1fr);
-    grid-template-rows: repeat(var(--grid-value), 1fr);
-    border: 5px solid #272727;
-    box-shadow: 0px 0px 7px #272727;
-}
-
-.grid-element {
-    border: none;
-    background-color: #EFF1F3;
-}
-
-.grid-element:hover {
-    background-color: #BFB6BB;
-    user-select: none;
-}
-*/
