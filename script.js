@@ -9,11 +9,13 @@ const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d');
 
 let mode = DEFAULT_MODE;
+const actualMode = document.getElementById("actualMode")
+actualMode.innerText = `MODE: ${mode}`
 
 let CANVAS_WIDTH = DEFAULT_SIZE;
 let CANVAS_HEIGHT = DEFAULT_SIZE;
 
-let scale = Math.floor(window.innerWidth / (CANVAS_WIDTH * 1.5))
+let scale = Math.floor(1920 / (CANVAS_WIDTH * 3.5))
 let currentWidth = CANVAS_WIDTH * scale;
 let currentHeight = CANVAS_HEIGHT * scale;
 
@@ -23,29 +25,42 @@ canvas.height = CANVAS_HEIGHT * scale
 canvas.style.width = `${CANVAS_WIDTH * scale}px`
 canvas.style.height = `${CANVAS_HEIGHT * scale}px`
 
+ctx.imageSmoothingEnabled = false;
+
 ctx.fillStyle = DEFAULT_COLOR_BACKGROUND
 ctx.fillRect(0, 0, canvas.width, canvas.height)
 ctx.fillStyle = DEFAULT_COLOR
 //
 // SIZE CHANGER
 const i1 = document.querySelector('#sizes')
-const change = document.querySelector('#change')
+const load = document.getElementById('change')
 const o1 = document.querySelector('#outputSize')
 
 o1.innerText = `${i1.value}px x ${i1.value}px`;
 
 i1.addEventListener('input', () =>
 {
-    o1.innerText = `${i1.value}px x ${i1.value}px`;
+    if (i1.value < 10)
+    {
+        o1.innerText = `0${i1.value}px x 0${i1.value}px`;
+    }
+    else
+    {
+        o1.innerText = `${i1.value}px x ${i1.value}px`;
+    }
+    
 })
 //
 // CANVAS RELOAD
-change.addEventListener('click', () =>
+load.addEventListener('click', () =>
 {
-    CANVAS_WIDTH = i1.value;
-    CANVAS_HEIGHT = i1.value;
-    scale = Math.floor(window.innerWidth / (CANVAS_WIDTH * 1.5))
-
+    mode = DEFAULT_MODE
+    actualMode.innerText = `MODE: ${mode}`
+    
+    CANVAS_WIDTH = parseInt(i1.value);
+    CANVAS_HEIGHT = parseInt(i1.value);
+    scale = Math.floor(1920 / (CANVAS_WIDTH * 3.5))
+    
     currentWidth = CANVAS_WIDTH * scale;
     currentHeight = CANVAS_HEIGHT * scale;
 
@@ -55,7 +70,9 @@ change.addEventListener('click', () =>
     canvas.style.width = `${CANVAS_WIDTH * scale}px`
     canvas.style.height = `${CANVAS_HEIGHT * scale}px`
 
-    ctx.fillStyle = DEFAULT_COLOR_BACKGROUND
+    size = i2.value * scale;
+
+    ctx.fillStyle = backgroundColor
     ctx.fillRect(0, 0, canvas.width, canvas.height)
     ctx.fillStyle = color
     draw()
@@ -77,8 +94,19 @@ const pencil = document.getElementById("pencil")
 pencil.addEventListener('click', () =>
 {
     mode = DEFAULT_MODE
+    actualMode.innerText = `MODE: ${mode}`
     console.log(mode)
 })
+//
+// BACKGROUND COLOR
+const colorBackground = document.getElementById("colorBackground")
+
+let backgroundColor = DEFAULT_COLOR_BACKGROUND
+
+colorBackground.oninput = function()
+{
+    backgroundColor = this.value
+}
 //
 // RAINBOW COLOR
 const rainbow = document.getElementById("rainbow")
@@ -86,31 +114,18 @@ const rainbow = document.getElementById("rainbow")
 rainbow.addEventListener('click', () =>
 {
     mode = "RAINBOW"
+    actualMode.innerText = `MODE: ${mode}`
     console.log(mode)
 })
 //
-// SHADING
-const shading = document.getElementById("shading")
-
-shading.addEventListener('click', () =>
-{
-    mode = "SHADING"
-})
-//
-// BRIGHTENING
-const brightening = document.getElementById("brightening")
-
-brightening.addEventListener('click', () =>
-{
-    mode = "BRIGHTENING"
-})
-//
-// SHADING
+// ERASER
 const eraser = document.getElementById("eraser")
 
 eraser.addEventListener('click', () =>
 {
     mode = "ERASER"
+    actualMode.innerText = `MODE: ${mode}`
+    console.log(mod)
 })
 //
 // BRUSH SIZE
@@ -148,7 +163,7 @@ window.onmousemove = function(event)
 
 function getMouse(canvas, event)
 {
-    let rect = canvas.getBoundingClientRect()
+    const rect = canvas.getBoundingClientRect()
 
     currentX = Math.floor((event.clientX - rect.left) / scale) * scale;
     currentY = Math.floor((event.clientY - rect.top) / scale) * scale;
@@ -183,7 +198,7 @@ clear.addEventListener('click', () =>
     ctx.fillStyle = color
 })
 //
-
+// MOUSE DRAWING & MODES
 function draw()
 {
     if (isPressed)
@@ -198,6 +213,10 @@ function draw()
             let tempColor = `#${Math.floor(Math.random()*16777215).toString(16)}`;
             //console.log(tempColor);
             ctx.fillStyle = tempColor;
+        }
+        else if (mode === "ERASER")
+        {
+            ctx.fillStyle = backgroundColor
         }
         //ctx.fillStyle = color
         ctx.fillRect(currentX, currentY, size, size);
