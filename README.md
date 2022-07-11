@@ -15,9 +15,8 @@ My goal is to create a page where you can draw images from 8x8 to 64x64. This is
 
 * **Color** - pick custom color
 * **Rainbow** - random color :)
-* **Shading** - add 10% more black
-* **Clearer** - add 10% more white
 * **Eraser** - remove color
+* **Brush** - custom brush size
 
 ## Changelog
 
